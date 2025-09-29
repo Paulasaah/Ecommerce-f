@@ -7,12 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-
-    <h1>NAVBAR</h1>
+    @include('layouts.navbar')
 
     @yield('content')
 
-    <h1>FOOTER</h1>
-
+    @include('layouts.footer')
 </body>
 </html>
