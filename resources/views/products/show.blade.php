@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section()
     <h1>Detalle producto</h1>
+@endsection
 
-
-
-</body>
-</html>
