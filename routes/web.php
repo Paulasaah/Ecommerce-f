@@ -4,45 +4,55 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes - LUXE Colombia
+|--------------------------------------------------------------------------
+*/
 
 // ===== HOME / WELCOME =====
 Route::get('/', [HomeController::class, 'welcome'])->name('index');
 
 // ===== AUTHENTICATION ROUTES =====
-Auth::routes();
+Auth::routes(); // Si usas Breeze/Fortify/Inertia, reemplázalo por sus rutas
 
 // ===== AUTHENTICATED USER HOME =====
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/home', [HomeController::class, 'index'])
+    ->name('home')
+    ->middleware('auth');
 
 // ===== PRODUCTS ROUTES =====
-Route::prefix('products')->name('products.')->controller(ProductController::class)->group(function () {
-    // List all products
-    Route::get('/', 'index')->name('index');
+Route::prefix('products')
+    ->as('products.')
+    ->controller(ProductController::class)
+    ->group(function () {
+        // Public
+        Route::get('/', 'index')->name('index');
+        Route::get('/search', 'search')->name('search');
+        Route::get('/{id}', 'show')->whereNumber('id')->name('show');
 
-    // Create new product (admin only - add middleware if needed)
-    Route::get('/create', 'create')->name('create');
-    Route::post('/create', 'store')->name('store');
-
-    // Show single product
-    Route::get('/{id}', 'show')->whereNumber('id')->name('show');
-
-    // Update product (admin only - add middleware if needed)
-    Route::get('/{id}/edit', 'edit')->whereNumber('id')->name('edit');
-    Route::put('/{id}', 'update')->whereNumber('id')->name('update');
-
-    // Delete product (admin only - add middleware if needed)
-    Route::delete('/{id}', 'destroy')->whereNumber('id')->name('destroy');
-});
+        // Protegidas (ej. admin): ajusta middleware a lo que uses
+        Route::middleware(['auth'])->group(function () {
+            Route::get('/create', 'create')->name('create');
+            Route::post('/', 'store')->name('store');             // POST /products
+            Route::get('/{id}/edit', 'edit')->whereNumber('id')->name('edit');
+            Route::put('/{id}', 'update')->whereNumber('id')->name('update');
+            Route::delete('/{id}', 'destroy')->whereNumber('id')->name('destroy');
+        });
+    });
 
 // ===== CATEGORIES ROUTES =====
-Route::prefix('categories')->name('categories.')->controller(CategoryController::class)->group(function () {
-    // List all categories
-    Route::get('/', 'index')->name('index');
+Route::prefix('categories')
+    ->as('categories.')
+    ->controller(CategoryController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{id}', 'show')->whereNumber('id')->name('show');
+        // Si prefieres slug: Route::get('/{slug}', 'show')->name('show');
+    });
 
-    // Show category with products
-    Route::get('/{id}', 'show')->whereNumber('id')->name('show');
-});
 
 // ===== CART ROUTES (Future Implementation) =====
 // Route::prefix('cart')->name('cart.')->group(function () {

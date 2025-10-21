@@ -21,10 +21,29 @@ class ProductController extends Controller
 
         $category = Category::all();
 
-        return view('products.index', [
-            'products'=> $products,
-            'category'=> $category,
-        ]);
+        return view('products.index', compact('products', 'category'));
+    }
+
+    /**
+     * Search products
+     */
+    public function search(Request $request)
+    {
+        $query = $request->input('q');
+
+        if (empty($query)) {
+            return view('products.search', [
+                'query' => null,
+                'products' => collect([])
+            ]);
+        }
+
+        $products = Product::with('category')
+            ->search($query)
+            ->paginate(12)
+            ->appends(['q' => $query]);
+
+        return view('products.search', compact('products', 'query'));
     }
 
     /**
@@ -32,9 +51,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-
-        $category = Category::orderBy('name')->get();
-        return view('products.create', ['category' => $category]);
+        $category = Category::all();
+        return view('products.create', compact('category'));
     }
 
     /**

@@ -13,11 +13,19 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::withProducts()
+        $category = Category::withProducts()
             ->withCount('products')
             ->get();
 
-        return view('categories.index', compact('categories'));
+        // Get featured products from all categories
+        $featuredProducts = Product::with('category')
+            ->featured()
+            ->inStock()
+            ->latest()
+            ->limit(8)
+            ->get();
+
+        return view('categories.index', compact('category', 'featuredProducts'));
     }
 
     /**
@@ -80,9 +88,9 @@ class CategoryController extends Controller
         $products = $query->paginate(12)->withQueryString();
 
         // Get all categories for navigation
-        $categories = Category::all();
+        $category = Category::all();
 
-        return view('categories.show', compact('category', 'products', 'categories'));
+        return view('categories.show', compact('category', 'products', 'category'));
     }
 }
 

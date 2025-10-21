@@ -110,7 +110,7 @@
         <!-- Toggle to Login -->
         <div class="auth-toggle">
             Already have an account?
-            <a href="{{ route('auth.login') }}">Sign In</a>
+            <a href="{{ route('login') }}">Sign In</a>
         </div>
 
         <!-- Divider -->

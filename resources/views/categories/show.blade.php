@@ -219,7 +219,7 @@
                     <h3 class="filter-title">Category</h3>
                     <select name="category" class="filter-select" onchange="this.form.submit()">
                         <option value="">All Categories</option>
-                        @foreach($categories as $cat)
+                        @foreach($category as $cat)
                             <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
                                 {{ $cat->name }}
                             </option>
