@@ -1,145 +1,135 @@
-
 @extends('layouts.app')
 
+@section('title', 'LUXE Colombia — Elegance Redefines the Everyday')
 
 @section('content')
 
-    <!-- Hero Minimalista -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="text-center hero-content">
-                <div class="stats-badge">
-                    <i class="fas fa-fire"></i>
-                    <span>+120 productos disponibles</span>
-                </div>
-                <h1 class="hero-title">Explora, Descubre, Compra</h1>
-                <p class="hero-subtitle">Encuentra los mejores productos en un solo lugar</p>
+@include('layouts.hero', [
+    'subtitle' => 'Fall / Winter 2025',
+    'title' => 'Elegance Redefines the Everyday',
+    'description' => 'Exclusive collections inspired by Colombian essence',
+    'primaryText' => 'Explore Collection',
+    'primaryLink' => '#featured',
+    'secondaryText' => 'View Campaign',
+    'secondaryLink' => '#'
+])
 
-                <div class="search-box">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="form-control search-input" placeholder="Buscar productos, marcas...">
-                </div>
+<section class="featured-section" id="featured">
+  <div class="section-title">
+    <p class="section-label">Curated For You</p>
+    <h2>Featured Collection</h2>
+  </div>
+
+  <div class="products-grid">
+    @forelse ($products as $product)
+      <a href="{{ route('products.show', ['id' => $product->id]) }}" class="product-card">
+        <div class="product-image-wrapper">
+          @if($product->badge)
+            <span class="product-badge">{{ $product->badge }}</span>
+          @endif
+
+          <img src="{{ \App\Helpers\ImageHelper::getProductImage($product) }}"
+               alt="{{ $product->name }}"
+               class="product-image"
+               loading="lazy" />
+
+          <div class="product-overlay">
+            <div class="product-overlay-content">
+              <p class="product-overlay-label">View Details</p>
+              <h3 class="product-overlay-title">{{ $product->name }}</h3>
+              <p class="product-overlay-price">
+                ${{ number_format($product->price, 0, ',', '.') }}
+              </p>
+              <span class="product-cta">Shop Now →</span>
             </div>
-        </div>
-    </section>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <!-- Products Section -->
-    <div class="container pb-5">
-        <div class="section-header">
-            <h2 class="section-title">Productos Destacados</h2>
-            <button class="filter-btn">
-                <i class="fas fa-filter me-2"></i>Filtrar
-            </button>
-        </div>
-
-        <div class="row g-4">
-            <!-- Product Card 1 -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="product-card" onclick="window.location.href='{{ url('/products/1') }}'">
-                    <div class="product-image">
-                        <span class="product-badge">Nike</span>
-                        <i class="fas fa-shoe-prints"></i>
-                    </div>
-                    <div class="product-body">
-                        <h5 class="product-name">Air Max 270 React</h5>
-                        <div class="product-price">$129.99</div>
-                        <div class="product-footer">
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.8</span>
-                            </div>
-                            <button class="btn-view">
-                                Ver más <i class="fas fa-arrow-right ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product Card 2 -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="product-card" onclick="window.location.href='{{ url('/products/2') }}'">
-                    <div class="product-image">
-                        <span class="product-badge">Apple</span>
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="product-body">
-                        <h5 class="product-name">iPhone 15 Pro Max 256GB</h5>
-                        <div class="product-price">$1,199</div>
-                        <div class="product-footer">
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.9</span>
-                            </div>
-                            <button class="btn-view">
-                                Ver más <i class="fas fa-arrow-right ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product Card 3 -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="product-card" onclick="window.location.href='{{ url('/products/3') }}'">
-                    <div class="product-image">
-                        <span class="product-badge">Sony</span>
-                        <i class="fas fa-headphones"></i>
-                    </div>
-                    <div class="product-body">
-                        <h5 class="product-name">WH-1000XM5 Premium</h5>
-                        <div class="product-price">$399.99</div>
-                        <div class="product-footer">
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <span>5.0</span>
-                            </div>
-                            <button class="btn-view">
-                                Ver más <i class="fas fa-arrow-right ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product Card 4 -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="product-card" onclick="window.location.href='{{ url('/products/4') }}'">
-                    <div class="product-image">
-                        <span class="product-badge">Samsung</span>
-                        <i class="fas fa-tv"></i>
-                    </div>
-                    <div class="product-body">
-                        <h5 class="product-name">Smart TV 55" QLED 4K</h5>
-                        <div class="product-price">$899</div>
-                        <div class="product-footer">
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.7</span>
-                            </div>
-                            <button class="btn-view">
-                                Ver más <i class="fas fa-arrow-right ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
 
-        <!-- Empty State (comentado, descomentar si no hay productos) -->
-        <!--
-        <div class="empty-state">
-            <div class="empty-icon">
-                <i class="fas fa-box-open"></i>
-            </div>
-            <h3>No hay productos disponibles</h3>
-            <p>Sé el primero en agregar un producto increíble a tu tienda</p>
-            <a href="{{ url('/products/create') }}" class="btn btn-create">
-                <i class="fas fa-plus me-2"></i>Crear Primer Producto
-            </a>
+        <div class="product-info">
+          <h3 class="product-name">{{ $product->name }}</h3>
+          <p class="product-price">
+            ${{ number_format($product->price, 0, ',', '.') }}
+          </p>
         </div>
-        -->
+      </a>
+    @empty
+      <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
+        <p class="text-muted" style="font-size: 1.1rem; margin-bottom: 2rem;">
+          No products available at the moment.
+        </p>
+        <a href="{{ route('products.create') }}" class="btn-primary">Add Your First Product</a>
+      </div>
+    @endforelse
+  </div>
+
+  @if($products->hasPages())
+    <div style="display: flex; justify-content: center; margin-top: 4rem;">
+      {{ $products->links() }}
     </div>
+  @endif
+</section>
+
+<!-- Categories Section -->
+<section class="categories-section">
+  <div class="section-title">
+    <h2>Shop by Category</h2>
+    <p style="text-align:center;max-width:600px;margin:1rem auto 0;color:#666;">
+      Discover timeless pieces crafted with Colombian passion and European elegance
+    </p>
+  </div>
+
+  <div class="categories-grid">
+    @forelse($category as $cat)
+      <a href="{{ route('categories.show', ['id' => $category->id]) }}" class="category-card">
+        <img src="{{ \App\Helpers\ImageHelper::getCategoryImage($category) }}"
+             alt="{{ $category->name }}"
+             class="category-image"
+             loading="lazy">
+        <div class="category-overlay">
+          <p class="category-label">Explore Collection</p>
+          <h3 class="category-title">{{ $category->name }}</h3>
+          <span class="category-cta">Discover →</span>
+        </div>
+      </a>
+    @empty
+      <div style="grid-column:1 / -1; text-align:center; padding: 3rem 2rem;">
+        <p class="text-muted">No categories available.</p>
+      </div>
+    @endforelse
+  </div>
+</section>
+
 @endsection
+
+@push('scripts')
+<script>
+  // Scroll reveal animation for products and categories
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, index * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all cards
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.product-card, .category-card');
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(card);
+    });
+  });
+</script>
+@endpush

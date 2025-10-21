@@ -18,12 +18,15 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $categoryId = Category::inRandomOrder()->value('id') ?? Category::factory();
+        $brandId    = Brand::inRandomOrder()->value('id') ?? Brand::factory();
+
         return [
-            'name' => fake()->name,
-            'price' => fake()->randomFloat(2, 100, 1000000),
-            'description' => fake()->paragraph(),
-            'category_id' => Category::inRandomOrder()->first()->id,
-            'brand_id' => Brand::inRandomOrder()->first()->id,
+            'name' => ucfirst($this->faker->words(3, true)),
+            'price' => $this->faker->numberBetween(120_000, 990_000),
+            'description' => $this->faker->sentence(15),
+            'category_id' => $categoryId,
+            'brand_id' => $brandId,
         ];
     }
 }

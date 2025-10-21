@@ -1,104 +1,159 @@
 @extends('layouts.app')
 
-@section('body_class', 'login-page')
+@section('title', 'Create Account — LUXE Colombia')
 
 @section('content')
-<div class="login-container">
-    <div class="login-card">
-        <!-- Header -->
-        <div class="login-header">
-            <div class="logo-icon">S</div>
-            <h2>ShopHub</h2>
-            <p>Acceso a tu tienda</p>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1 class="auth-title">Create Account</h1>
+            <p class="auth-subtitle">Join LUXE Colombia today</p>
         </div>
 
-        <!-- Body -->
-        <div class="login-body">
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
+        @if ($errors->any())
+        <div class="alert-auth alert-danger">
+            <i class="fas fa-exclamation-circle"></i>
+            <div>
+                <strong>Please correct the following errors:</strong>
+                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        @endif
 
-                <!-- Email Field -->
-                <div class="form-group">
-                    <label for="email">Correo Electrónico</label>
-                    <div class="input-icon">
-                        <input
-                            id="email"
-                            type="email"
-                            class="form-control @error('email') is-invalid @enderror"
-                            name="email"
-                            value="{{ old('email') }}"
-                            placeholder="tu@email.com"
-                            required
-                            autocomplete="email"
-                            autofocus
-                        >
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    @error('email')
-                        <div class="invalid-feedback">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                    @enderror
-                </div>
+        <form method="POST" action="{{ route('register') }}" class="auth-form">
+            @csrf
 
-                <!-- Password Field -->
-                <div class="form-group">
-                    <label for="password">Contraseña</label>
-                    <div class="input-icon">
-                        <input
-                            id="password"
-                            type="password"
-                            class="form-control @error('password') is-invalid @enderror"
-                            name="password"
-                            placeholder="••••••••"
-                            required
-                            autocomplete="current-password"
-                        >
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    @error('password')
-                        <div class="invalid-feedback">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                    @enderror
-                </div>
-
-                <!-- Remember Me -->
-                <div class="form-check">
+            <!-- Full Name -->
+            <div class="form-group-auth">
+                <label class="form-label-auth" for="name">Full Name</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-user input-icon"></i>
                     <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="remember"
-                        id="remember"
-                        {{ old('remember') ? 'checked' : '' }}
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="form-control-auth @error('name') is-invalid @enderror"
+                        placeholder="Enter your name"
+                        value="{{ old('name') }}"
+                        required
+                        autofocus
                     >
-                    <label class="form-check-label" for="remember">
-                        Recuérdame en este dispositivo
-                    </label>
                 </div>
+            </div>
 
-                <!-- Submit Button -->
-                <button type="submit" class="btn-login">
-                    <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
-                </button>
+            <!-- Email -->
+            <div class="form-group-auth">
+                <label class="form-label-auth" for="email">Email</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-control-auth @error('email') is-invalid @enderror"
+                        placeholder="your@email.com"
+                        value="{{ old('email') }}"
+                        required
+                    >
+                </div>
+            </div>
 
-                <!-- Forgot Password -->
-                @if (Route::has('password.request'))
-                    <div class="forgot-password">
-                        <a href="{{ route('password.request') }}">
-                            ¿Olvidaste tu contraseña?
-                        </a>
-                    </div>
-                @endif
+            <!-- Password -->
+            <div class="form-group-auth">
+                <label class="form-label-auth" for="password">Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control-auth @error('password') is-invalid @enderror"
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">
+                    Must be at least 8 characters
+                </p>
+            </div>
 
-                <!-- Sign Up Link -->
-                @if (Route::has('register'))
-                    <div class="signup-link">
-                        <p>¿No tienes cuenta? <a href="{{ route('register') }}">Regístrate aquí</a></p>
-                    </div>
-                @endif
-            </form>
+            <!-- Confirm Password -->
+            <div class="form-group-auth">
+                <label class="form-label-auth" for="password-confirm">Confirm Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input
+                        type="password"
+                        id="password-confirm"
+                        name="password_confirmation"
+                        class="form-control-auth"
+                        placeholder="Confirm your password"
+                        required
+                    >
+                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password-confirm')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-auth">Create Account</button>
+        </form>
+
+        <!-- Toggle to Login -->
+        <div class="auth-toggle">
+            Already have an account?
+            <a href="{{ route('auth.login') }}">Sign In</a>
         </div>
+
+        <!-- Divider -->
+        <div class="auth-divider">
+            <span>OR</span>
+        </div>
+
+        <!-- Guest Access -->
+        <a href="{{ route('products.index') }}" class="btn-guest">Continue as Guest</a>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    function togglePasswordVisibility(inputId) {
+        const input = document.getElementById(inputId);
+        const button = input.closest('.input-wrapper').querySelector('.toggle-password');
+        const icon = button.querySelector('i');
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+
+    // Password strength indicator (optional enhancement)
+    const passwordInput = document.getElementById('password');
+    const confirmInput = document.getElementById('password-confirm');
+
+    confirmInput.addEventListener('input', function() {
+        if (this.value && passwordInput.value !== this.value) {
+            this.style.borderColor = '#DC3545';
+        } else if (this.value && passwordInput.value === this.value) {
+            this.style.borderColor = '#28A745';
+        } else {
+            this.style.borderColor = '#ddd';
+        }
+    });
+</script>
+@endpush
