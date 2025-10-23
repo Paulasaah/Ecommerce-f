@@ -26,10 +26,10 @@
     <div id="app">
         <!-- Mostrar navbar solo si NO estamos en login o registro -->
         @if (!Route::is('login') && !Route::is('register') && !Route::is('password.*') && !Route::is('verification.*'))
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    SHOPHUB
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -43,17 +43,32 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <!-- Colecciones -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/colecciones') }}">Colecciones</a>
+                        </li>
+
+                        <!-- Hombre -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/hombre') }}">Hombre</a>
+                        </li>
+
+                        <!-- Mujer -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/mujer') }}">Mujer</a>
+                        </li>
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
                                 </li>
                             @endif
                         @else
