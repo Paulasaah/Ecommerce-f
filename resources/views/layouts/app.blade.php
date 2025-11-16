@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
@@ -26,7 +26,7 @@
     <div id="app">
         <!-- Mostrar navbar solo si NO estamos en login o registro -->
         @if (!Route::is('login') && !Route::is('register') && !Route::is('password.*') && !Route::is('verification.*'))
-        @include ('layouts.navbar')
+        @include('layouts.navbar')
         @endif
 
         <main class="@if (Route::is('login') || Route::is('register') || Route::is('password.*')) login-main @else py-4 @endif">
@@ -34,7 +34,24 @@
         </main>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!-- Bootstrap Bundle JS (incluye Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- FIX TEMPORAL PARA DROPDOWN -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggle = document.getElementById('navbarDropdown');
+            if (dropdownToggle) {
+                // Forzar inicialización del dropdown
+                const dropdown = new bootstrap.Dropdown(dropdownToggle);
+                
+                // Agregar listener manual
+                dropdownToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    dropdown.toggle();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
