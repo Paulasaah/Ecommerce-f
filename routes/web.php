@@ -22,8 +22,9 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Rutas de admin (CORRECCIÓN: faltaba especificar el controller)
-Route::prefix('admin')->middleware('auth')->group(function(){
+// Rutas de admin 
+Route::prefix('admin')->group(function(){
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
     Route::post('/categories/store',[ CategoryController::class,'store'])->name('admin.categories.store');
 });

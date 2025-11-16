@@ -9,6 +9,7 @@ class Brand extends Model
 {
     use HasFactory;
     protected $table = "brand";
+    protected $primarykey = 'id';
     protected $fillable = ['name'];
     public $timestamps = true;
 }

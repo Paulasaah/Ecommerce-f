@@ -24,7 +24,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.categories*') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" 
+        <a class="nav-link {{ request()->routeIs('admin.categories.create') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" 
            href="{{ route('admin.categories.create') }}">
           <i class="material-symbols-rounded opacity-5">receipt_long</i>
           <span class="nav-link-text ms-1">Categorías</span>
