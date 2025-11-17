@@ -706,6 +706,24 @@ textarea.form-control {
     line-height: 1.6;
 }
 
+/* Form Validation */
+.is-invalid {
+    border-color: var(--error-red) !important;
+}
+
+.is-invalid:focus {
+    border-color: var(--error-red) !important;
+    box-shadow: 0 0 0 3px rgba(200, 90, 84, 0.15) !important;
+}
+
+.invalid-feedback {
+    display: block;
+    color: var(--error-red) !important;
+    font-size: 0.8125rem !important;
+    margin-top: 0.5rem !important;
+    font-weight: 500;
+}
+
 /* File Upload Area */
 .file-upload-area {
     border: 2px dashed var(--luxury-beige) !important;

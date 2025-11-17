@@ -23,7 +23,13 @@ class ProductController extends Controller
         ]);
     }
     function store(Request $request){
-
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'brand_id' => 'required|exists:brands,id',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+        ]);
         $product = new Product();
         $product->name = $request->name;
         $product->brand_id = $request->brand_id;

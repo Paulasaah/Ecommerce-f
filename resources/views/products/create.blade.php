@@ -33,12 +33,18 @@
                             </label>
                             <input
                                 type="text"
-                                class="form-control"
+                                class="form-control @error('name') is-invalid @enderror"
                                 id="name"
                                 name="name"
                                 placeholder="Ej: iPhone 15 Pro Max 256GB"
                                 required
+                                value="{{ old('name') }}"
                             >
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <div class="form-text">
                                 Ingresa un nombre descriptivo y atractivo
                             </div>
@@ -52,16 +58,23 @@
                                 <span style="color: var(--error-red);">*</span>
                             </label>
                             <select
-                                class="form-select"
+                                class="form-select @error('brand_id') is-invalid @enderror"
                                 id="brand"
                                 name="brand_id"
                                 required
                             >
                                 <option value="" selected disabled>Selecciona una marca</option>
                                 @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                    <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
+                                        {{ $brand->name }}
+                                    </option>
                                 @endforeach
                             </select>
+                            @error('brand_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <div class="form-text">
                                 La marca del fabricante del producto
                             </div>
@@ -75,16 +88,23 @@
                                 <span style="color: var(--error-red);">*</span>
                             </label>
                             <select
-                                class="form-select"
+                                class="form-select @error('category_id') is-invalid @enderror"
                                 id="category_id"
                                 name="category_id"
                                 required
                             >
                                 <option value="" selected disabled>Selecciona una categoría</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
                                 @endforeach
                             </select>
+                            @error('category_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <div class="form-text">
                                 Categoría que mejor describe tu producto
                             </div>
@@ -103,14 +123,20 @@
                                 </span>
                                 <input
                                     type="number"
-                                    class="form-control"
+                                    class="form-control @error('price') is-invalid @enderror"
                                     id="price"
                                     name="price"
                                     placeholder="0.00"
                                     step="0.01"
                                     min="0"
                                     required
+                                    value="{{ old('price') }}"
                                 >
+                                @error('price')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="form-text">
                                 Utiliza punto decimal (Ej: 99.99)
@@ -125,13 +151,18 @@
                                 <span style="color: var(--error-red);">*</span>
                             </label>
                             <textarea
-                                class="form-control"
+                                class="form-control @error('description') is-invalid @enderror"
                                 id="description"
                                 name="description"
                                 rows="5"
                                 placeholder="Describe las características, beneficios y detalles importantes del producto..."
                                 required
-                            ></textarea>
+                            >{{ old('description') }}</textarea>
+                            @error('description')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <div class="form-text">
                                 Una buena descripción aumenta las ventas
                             </div>
