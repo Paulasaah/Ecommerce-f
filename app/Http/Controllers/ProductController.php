@@ -25,9 +25,9 @@ class ProductController extends Controller
     function store(Request $request){
         $request->validate([
             'name' => 'required|string|max:255',
-            'brand_id' => 'required|exists:brands,id',
-            'category_id' => 'required|exists:categories,id',
-            'price' => 'required|numeric',
+            'brand_id' => 'required|exists:brand,id',
+            'category_id' => 'required|exists:category,id',
+            'price' => 'required|numeric|min:0|max:999999.99',
             'description' => 'required|string',
         ]);
         $product = new Product();
@@ -38,7 +38,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->save();
 
-        return ('Se guardo el producto');
+        return redirect()->route('admin.products.table');
 
 
     }
@@ -47,7 +47,7 @@ class ProductController extends Controller
         return view('products.show');
     }
     function table(){
-        $products = Product::paginate(10);
+        $products = Product::orderBy('id', 'desc')->paginate(10);
         return view('products.table',[
             'products' => $products
             ]);

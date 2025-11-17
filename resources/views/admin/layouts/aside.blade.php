@@ -18,8 +18,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.products.create') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" 
-           href="{{ route('admin.products.create') }}">
+        <a class="nav-link {{ request()->routeIs('admin.products.table') ? 'active bg-gradient-dark text-white' : 'text-dark' }}" 
+           href="{{ route('admin.products.table') }}">
           <i class="material-symbols-rounded opacity-5">table_view</i>
           <span class="nav-link-text ms-1">Productos</span>
         </a>

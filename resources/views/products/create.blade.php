@@ -30,7 +30,7 @@
                             </ul>
                         </div>
                     @endif
-
+                    
                     <form id="productForm" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="_method" value="POST">
@@ -73,6 +73,7 @@
                                 id="brand"
                                 name="brand_id"
                                 required
+                                value="{{ old('brand_id') }}"
                             >
                                 <option value="" selected disabled>Selecciona una marca</option>
                                 @foreach ($brands as $brand)
@@ -103,6 +104,7 @@
                                 id="category_id"
                                 name="category_id"
                                 required
+                                value="{{ old('category_id') }}"
                             >
                                 <option value="" selected disabled>Selecciona una categoría</option>
                                 @foreach ($categories as $category)

@@ -56,7 +56,7 @@
   <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
   <script src="{{ asset('assets/js/material-dashboard.min.js') }}?v=3.1.0"></script>
   
-  <!-- Admin Enhanced Scripts -->
+  <!-- Js-->
   <script>
     // Sidebar toggle con animación mejorada
     document.addEventListener('DOMContentLoaded', function() {

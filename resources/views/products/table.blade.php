@@ -15,6 +15,7 @@
             </h6>
         </div>
         <div class="card-body">
+        <a type="button" class="btn btn-success" href="{{ route('admin.products.create') }}">Agregar nuevo </a>
             <table class="table table-hover">
                 <thead>
                     <tr>
