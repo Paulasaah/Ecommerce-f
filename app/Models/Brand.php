@@ -12,4 +12,12 @@ class Brand extends Model
     protected $primarykey = 'id';
     protected $fillable = ['name'];
     public $timestamps = true;
+
+    /**
+     * Relación: Una marca tiene muchos productos
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'brand_id');
+    }
 }

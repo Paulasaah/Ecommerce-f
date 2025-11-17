@@ -37,20 +37,12 @@
     <!-- Bootstrap Bundle JS (incluye Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- FIX TEMPORAL PARA DROPDOWN -->
+    <!-- Dropdown Fix -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggle = document.getElementById('navbarDropdown');
-            if (dropdownToggle) {
-                // Forzar inicialización del dropdown
-                const dropdown = new bootstrap.Dropdown(dropdownToggle);
-                
-                // Agregar listener manual
-                dropdownToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    dropdown.toggle();
-                });
-            }
+            // Inicializar todos los dropdowns de Bootstrap
+            const dropdownElementList = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+            const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl));
         });
     </script>
 </body>

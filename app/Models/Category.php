@@ -11,4 +11,12 @@ class Category extends Model
     protected $table = "category";
     protected $fillable = ['name'];
     public $timestamps = true;
+
+    /**
+     * Relación: Una categoría tiene muchos productos
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id');
+    }
 }

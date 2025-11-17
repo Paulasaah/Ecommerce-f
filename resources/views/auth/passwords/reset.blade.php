@@ -6,7 +6,7 @@
         <div class="login-card reset-password-card">
             <!-- Header -->
             <div class="login-header">
-                <div class="logo-icon">🔐</div>
+                <div class="logo-icon">S</div>
                 <h2>{{ __('Reset Password') }}</h2>
                 <p>{{ __('Ingresa tu nueva contraseña') }}</p>
             </div>

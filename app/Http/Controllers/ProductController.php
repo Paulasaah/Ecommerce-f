@@ -10,7 +10,41 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     function index(Request $request){
-        return view('products.index');
+        $query = Product::with(['brand', 'category']);
+
+        if ($request->filled('search')) {
+            $searchTerm = $request->search;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('name', 'like', '%' . $searchTerm . '%')
+                  ->orWhereHas('brand', function($brandQuery) use ($searchTerm) {
+                      $brandQuery->where('name', 'like', '%' . $searchTerm . '%');
+                  })
+                  ->orWhereHas('category', function($categoryQuery) use ($searchTerm) {
+                      $categoryQuery->where('name', 'like', '%' . $searchTerm . '%');
+                  });
+            });
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        if ($request->filled('brand')) {
+            $query->where('brand_id', $request->brand);
+        }
+
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+
+        $products = $query->orderBy('id', 'desc')->paginate(12)->withQueryString();
+        
+        return view('products.index', [
+            'products' => $products
+        ]);
     }
     function create(){
 
@@ -47,9 +81,17 @@ class ProductController extends Controller
         return view('products.show');
     }
     function table(){
-        $products = Product::orderBy('id', 'desc')->paginate(10);
+        $products = Product::with(['brand', 'category'])->orderBy('id', 'desc')->paginate(10);
         return view('products.table',[
             'products' => $products
             ]);
+    }
+
+    function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+        
+        return redirect()->route('admin.products.table')->with('success', 'Producto eliminado exitosamente');
     }
 }
