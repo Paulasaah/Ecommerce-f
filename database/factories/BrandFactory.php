@@ -13,8 +13,9 @@ class BrandFactory extends Factory
 
     public function definition(): array
     {
+        $brand = ['Tommy Hilfiger', 'H&M', 'Aeropostale', 'Adidas', 'alo', 'Mattelsa', 'Levis', 'Puma', 'Nike', 'Adidas', 'Under Armour'];
         return [
-            'name' => fake()->name()
+            'name' => $this->faker->randomElement($brand)
         ];
     }
 }

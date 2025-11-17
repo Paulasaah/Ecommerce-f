@@ -33,9 +33,9 @@
               <a class="dropdown-item border-radius-md" href="javascript:;">
                 <div class="d-flex py-1">
                   <div class="my-auto">
-                    <img src="{{ asset('assets/img/team-2.jpg') }}" class="avatar avatar-sm me-3">
+                    <i class="material-symbols-rounded opacity-5">person</i>
                   </div>
-                  <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex flex-column justify-content-center ms-3">
                     <h6 class="text-sm font-weight-normal mb-1">
                       <span class="font-weight-bold">New message</span> from Laur
                     </h6>

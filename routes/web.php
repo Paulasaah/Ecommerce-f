@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 // Rutas de productos
 Route::prefix('products')->controller(ProductController::class)->group(function() {
     Route::get('/', 'index')->name('products.index');
-    Route::get('/create', 'create')->name('products.create');
     Route::get('/{id}/{category?}', 'show')->name('products.show');
 });
 
@@ -27,4 +26,6 @@ Route::prefix('admin')->group(function(){
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
     Route::post('/categories/store',[ CategoryController::class,'store'])->name('admin.categories.store');
+
+    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
 });

@@ -1,33 +1,34 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 
 @section('content')
-    <!-- Formulario -->
-    <div class="container">
-        <div class="form-container">
-            <div class="form-card">
-                <!-- Header -->
-                <div class="form-header">
-                    <div class="form-header-content">
-                        <div class="form-icon">
-                            <i class="fas fa-box-open"></i>
-                        </div>
-                        <h1>Crear Nuevo Producto</h1>
-                        <p>Completa la información para agregar un producto increíble</p>
-                    </div>
-                </div>
+<div class="luxury-dashboard">
+    <!-- Header Section -->
+    <div class="luxury-header">
+        <h3>Crear Producto</h3>
+        <p>Unab Shop - Agregar Nuevo Producto al Catálogo</p>
+    </div>
 
-                <!-- Form Body -->
-                <div class="form-body">
+    <!-- Form Card -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6>
+                        <i class="material-symbols-rounded" style="vertical-align: middle; margin-right: 8px;">add_box</i>
+                        Información del Producto
+                    </h6>
+                </div>
+                <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Nombre -->
                         <div class="mb-4">
                             <label for="nombre" class="form-label">
-                                <i class="fas fa-tag label-icon"></i>
+                                <i class="fas fa-tag" style="margin-right: 8px; color: var(--luxury-accent);"></i>
                                 Nombre del Producto
-                                <span class="required">*</span>
+                                <span style="color: var(--error-red);">*</span>
                             </label>
                             <input
                                 type="text"
@@ -45,18 +46,21 @@
                         <!-- Marca -->
                         <div class="mb-4">
                             <label for="brand" class="form-label">
-                                <i class="fas fa-certificate label-icon"></i>
+                                <i class="fas fa-certificate" style="margin-right: 8px; color: var(--luxury-accent);"></i>
                                 Marca
-                                <span class="required">*</span>
+                                <span style="color: var(--error-red);">*</span>
                             </label>
-                            <input
-                                type="text"
-                                class="form-control"
+                            <select
+                                class="form-select"
                                 id="brand"
                                 name="brand"
-                                placeholder="Ej: Apple, Nike, Samsung"
                                 required
                             >
+                                <option value="" selected disabled>Selecciona una marca</option>
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                @endforeach
+                            </select>
                             <div class="form-text">
                                 La marca del fabricante del producto
                             </div>
@@ -65,9 +69,9 @@
                         <!-- Categoría -->
                         <div class="mb-4">
                             <label for="categoria" class="form-label">
-                                <i class="fas fa-layer-group label-icon"></i>
+                                <i class="fas fa-layer-group" style="margin-right: 8px; color: var(--luxury-accent);"></i>
                                 Categoría
-                                <span class="required">*</span>
+                                <span style="color: var(--error-red);">*</span>
                             </label>
                             <select
                                 class="form-select"
@@ -76,16 +80,9 @@
                                 required
                             >
                                 <option value="" selected disabled>Selecciona una categoría</option>
-                                <option value="electronica">📱 Electrónica</option>
-                                <option value="ropa">👕 Ropa y Moda</option>
-                                <option value="deportes">⚽ Deportes</option>
-                                <option value="hogar">🏠 Hogar y Jardín</option>
-                                <option value="juguetes">🎮 Juguetes y Juegos</option>
-                                <option value="libros">📚 Libros</option>
-                                <option value="alimentos">🍕 Alimentos y Bebidas</option>
-                                <option value="salud">💊 Salud y Belleza</option>
-                                <option value="automotriz">🚗 Automotriz</option>
-                                <option value="otros">🔧 Otros</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                             <div class="form-text">
                                 Categoría que mejor describe tu producto
@@ -95,9 +92,9 @@
                         <!-- Precio -->
                         <div class="mb-4">
                             <label for="precio" class="form-label">
-                                <i class="fas fa-dollar-sign label-icon"></i>
+                                <i class="fas fa-dollar-sign" style="margin-right: 8px; color: var(--luxury-accent);"></i>
                                 Precio
-                                <span class="required">*</span>
+                                <span style="color: var(--error-red);">*</span>
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text">
@@ -122,9 +119,9 @@
                         <!-- Descripción -->
                         <div class="mb-4">
                             <label for="description" class="form-label">
-                                <i class="fas fa-align-left label-icon"></i>
+                                <i class="fas fa-align-left" style="margin-right: 8px; color: var(--luxury-accent);"></i>
                                 Descripción
-                                <span class="required">*</span>
+                                <span style="color: var(--error-red);">*</span>
                             </label>
                             <textarea
                                 class="form-control"
@@ -142,9 +139,9 @@
                         <!-- Imagen -->
                         <div class="mb-4">
                             <label for="img" class="form-label">
-                                <i class="fas fa-image label-icon"></i>
+                                <i class="fas fa-image" style="margin-right: 8px; color: var(--luxury-accent);"></i>
                                 Imagen del Producto
-                                <span class="required">*</span>
+                                <span style="color: var(--error-red);">*</span>
                             </label>
                             <div class="file-upload-area" id="fileUploadArea">
                                 <input
@@ -163,12 +160,12 @@
                         </div>
 
                         <!-- Botones de Acción -->
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-save">
-                                <i class="fas fa-check me-2"></i>Guardar Producto
+                        <div class="d-flex gap-3 mt-5">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-check" style="margin-right: 8px;"></i>Guardar Producto
                             </button>
-                            <a href="{{ url('/products') }}" class="btn btn-cancel">
-                                <i class="fas fa-times me-2"></i>Cancelar
+                            <a href="{{ url('/admin') }}" class="btn btn-outline-dark">
+                                <i class="fas fa-times" style="margin-right: 8px;"></i>Cancelar
                             </a>
                         </div>
                     </form>
@@ -176,6 +173,7 @@
             </div>
         </div>
     </div>
+</div>
     <!--js -->
     <script>
         // Preview del archivo seleccionado

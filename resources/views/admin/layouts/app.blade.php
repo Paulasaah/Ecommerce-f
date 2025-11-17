@@ -17,8 +17,13 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <!-- CSS Files -->
-  <link id="pagestyle" href="{{ asset('assets/css/material-dashboard.css?v=3.2.0') }}" rel="stylesheet" />
+  
+  <!-- Material Dashboard CSS (Base styles) -->
+  <link href="{{ asset('assets/css/material-dashboard.min.css') }}?v=3.1.0" rel="stylesheet" />
+  
+  <!-- CSS personalizado admin (Sobrescribe Material Dashboard) -->
+  <link href="{{ asset('css/admin.css') }}?v={{ time() }}" rel="stylesheet" />
+
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -46,11 +51,87 @@
   <!-- Core JS Files -->
   <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
   <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+  
+  <!-- Material Dashboard JS -->
   <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-  <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-  <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-  <!-- Control Center for Material Dashboard -->
-  <script src="{{ asset('assets/js/material-dashboard.min.js?v=3.2.0') }}"></script>
+  <script src="{{ asset('assets/js/material-dashboard.min.js') }}?v=3.1.0"></script>
+  
+  <!-- Admin Enhanced Scripts -->
+  <script>
+    // Sidebar toggle con animación mejorada
+    document.addEventListener('DOMContentLoaded', function() {
+      const iconNavbar = document.getElementById('iconNavbarSidenav');
+      const sidenav = document.getElementById('sidenav-main');
+      const body = document.body;
+      
+      if (iconNavbar && sidenav) {
+        iconNavbar.addEventListener('click', function() {
+          sidenav.classList.toggle('show');
+          body.classList.toggle('sidebar-open');
+        });
+      }
+
+      // Agregar efecto de carga suave
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+
+      // Contador animado para valores numéricos
+      const animateValue = (element, start, end, duration) => {
+        const range = end - start;
+        const increment = range / (duration / 16);
+        let current = start;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+            current = end;
+            clearInterval(timer);
+          }
+          
+          // Formatear números con comas
+          const formatted = Math.floor(current).toLocaleString();
+          element.textContent = element.textContent.includes('$') 
+            ? '$' + formatted 
+            : formatted;
+        }, 16);
+      };
+
+      // Observador de intersección para animaciones al scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observar elementos que deben animarse
+      document.querySelectorAll('.card, .luxury-stat-card').forEach(el => {
+        observer.observe(el);
+      });
+    });
+
+    // Smooth scroll para navegación
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

@@ -14,17 +14,17 @@ class BrandSeeder extends Seeder
     public function run(): void
     {
         $myBrand1 = new Brand;
-        $myBrand1->name = "Apple";
+        $myBrand1->name = "Arkitect";
         $myBrand1->save();
 
         $myBrand2 = new Brand();
-        $myBrand2->name = "Samgsumg";
+        $myBrand2->name = "Mattelsa";
         $myBrand2->save();
 
         $myBrand3 = new Brand();
-        $myBrand3->name = "Xiaomi";
+        $myBrand3->name = "alo";
         $myBrand3->save();
 
-        Brand::factory(1000)->create();
+        Brand::factory(10)->create();
     }
 }

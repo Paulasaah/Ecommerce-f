@@ -1,90 +1,106 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<div class="row">
-  <div class="ms-3">
-    <h3 class="mb-0 h4 font-weight-bolder">Dashboard Admin Page Unab Shop</h3>
-    <p class="mb-4">Check the sales, value and bounce rate by country.</p>
-  </div>
-  
-  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-    <div class="card">
-      <div class="card-header p-2 ps-3">
-        <div class="d-flex justify-content-between">
-          <div>
-            <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-            <h4 class="mb-0">$53k</h4>
-          </div>
-          <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-            <i class="material-symbols-rounded opacity-10">weekend</i>
-          </div>
-        </div>
-      </div>
-      <hr class="dark horizontal my-0">
-      <div class="card-footer p-2 ps-3">
-        <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+55% </span>than last week</p>
-      </div>
+<div class="luxury-dashboard">
+    <!-- Header Section -->
+    <div class="luxury-header">
+        <h3>Dashboard Admin</h3>
+        <p>Unab Shop - Panel de Control y Estadísticas</p>
     </div>
-  </div>
-  
-  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-    <div class="card">
-      <div class="card-header p-2 ps-3">
-        <div class="d-flex justify-content-between">
-          <div>
-            <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-            <h4 class="mb-0">2300</h4>
-          </div>
-          <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-            <i class="material-symbols-rounded opacity-10">person</i>
-          </div>
+
+    <!-- Stats Cards Row -->
+    <div class="row">
+        <!-- Today's Money Card -->
+        <div class="col-xl-3 col-sm-6">
+            <div class="luxury-stat-card">
+                <div class="stat-card-body">
+                    <div class="stat-card-header">
+                        <div>
+                            <p class="stat-label">Today's Money</p>
+                            <h4 class="stat-value">$53k</h4>
+                        </div>
+                        <div class="stat-icon-wrapper">
+                            <i class="material-symbols-rounded">payments</i>
+                        </div>
+                    </div>
+                    <div class="stat-card-footer">
+                        <p class="stat-trend">
+                            <span class="stat-trend-value positive">+55%</span>
+                            que la semana pasada
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <hr class="dark horizontal my-0">
-      <div class="card-footer p-2 ps-3">
-        <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+3% </span>than last month</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-    <div class="card">
-      <div class="card-header p-2 ps-3">
-        <div class="d-flex justify-content-between">
-          <div>
-            <p class="text-sm mb-0 text-capitalize">Ads Views</p>
-            <h4 class="mb-0">3,462</h4>
-          </div>
-          <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-            <i class="material-symbols-rounded opacity-10">leaderboard</i>
-          </div>
+
+        <!-- Today's Users Card -->
+        <div class="col-xl-3 col-sm-6">
+            <div class="luxury-stat-card">
+                <div class="stat-card-body">
+                    <div class="stat-card-header">
+                        <div>
+                            <p class="stat-label">Today's Users</p>
+                            <h4 class="stat-value">2,300</h4>
+                        </div>
+                        <div class="stat-icon-wrapper">
+                            <i class="material-symbols-rounded">group</i>
+                        </div>
+                    </div>
+                    <div class="stat-card-footer">
+                        <p class="stat-trend">
+                            <span class="stat-trend-value positive">+3%</span>
+                            que el mes pasado
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <hr class="dark horizontal my-0">
-      <div class="card-footer p-2 ps-3">
-        <p class="mb-0 text-sm"><span class="text-danger font-weight-bolder">-2% </span>than yesterday</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-xl-3 col-sm-6">
-    <div class="card">
-      <div class="card-header p-2 ps-3">
-        <div class="d-flex justify-content-between">
-          <div>
-            <p class="text-sm mb-0 text-capitalize">Sales</p>
-            <h4 class="mb-0">$103,430</h4>
-          </div>
-          <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-            <i class="material-symbols-rounded opacity-10">weekend</i>
-          </div>
+
+        <!-- Ads Views Card -->
+        <div class="col-xl-3 col-sm-6">
+            <div class="luxury-stat-card">
+                <div class="stat-card-body">
+                    <div class="stat-card-header">
+                        <div>
+                            <p class="stat-label">Ads Views</p>
+                            <h4 class="stat-value">3,462</h4>
+                        </div>
+                        <div class="stat-icon-wrapper">
+                            <i class="material-symbols-rounded">trending_up</i>
+                        </div>
+                    </div>
+                    <div class="stat-card-footer">
+                        <p class="stat-trend">
+                            <span class="stat-trend-value negative">-2%</span>
+                            que ayer
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <hr class="dark horizontal my-0">
-      <div class="card-footer p-2 ps-3">
-        <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+5% </span>than yesterday</p>
-      </div>
+
+        <!-- Sales Card -->
+        <div class="col-xl-3 col-sm-6">
+            <div class="luxury-stat-card">
+                <div class="stat-card-body">
+                    <div class="stat-card-header">
+                        <div>
+                            <p class="stat-label">Sales</p>
+                            <h4 class="stat-value">$103,430</h4>
+                        </div>
+                        <div class="stat-icon-wrapper">
+                            <i class="material-symbols-rounded">shopping_cart</i>
+                        </div>
+                    </div>
+                    <div class="stat-card-footer">
+                        <p class="stat-trend">
+                            <span class="stat-trend-value positive">+5%</span>
+                            que ayer
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 @endsection
