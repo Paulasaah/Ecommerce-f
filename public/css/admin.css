@@ -724,6 +724,35 @@ textarea.form-control {
     font-weight: 500;
 }
 
+/* Alerts */
+.alert {
+    padding: 1rem 1.25rem !important;
+    border-radius: 10px !important;
+    border: none !important;
+    font-size: 0.9375rem !important;
+}
+
+.alert-danger {
+    background: rgba(200, 90, 84, 0.1) !important;
+    color: var(--error-red) !important;
+    border-left: 4px solid var(--error-red) !important;
+}
+
+.alert-success {
+    background: rgba(74, 124, 89, 0.1) !important;
+    color: var(--success-green) !important;
+    border-left: 4px solid var(--success-green) !important;
+}
+
+.alert ul {
+    margin-bottom: 0;
+    padding-left: 1.5rem;
+}
+
+.alert li {
+    margin-bottom: 0.25rem;
+}
+
 /* File Upload Area */
 .file-upload-area {
     border: 2px dashed var(--luxury-beige) !important;
@@ -789,6 +818,63 @@ textarea.form-control {
 /* Gap Utility */
 .gap-3 {
     gap: 1rem !important;
+}
+
+/* === TABLES === */
+.table {
+    color: var(--luxury-charcoal) !important;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead th {
+    background: var(--luxury-beige) !important;
+    color: var(--luxury-charcoal) !important;
+    font-weight: 600 !important;
+    font-size: 0.8125rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    padding: 1rem 1.25rem !important;
+    border: none !important;
+}
+
+.table thead th:first-child {
+    border-radius: 10px 0 0 0;
+}
+
+.table thead th:last-child {
+    border-radius: 0 10px 0 0;
+}
+
+.table tbody tr {
+    transition: all 0.2s var(--ease-smooth);
+}
+
+.table tbody tr:hover {
+    background: var(--luxury-cream) !important;
+}
+
+.table tbody td,
+.table tbody th {
+    padding: 1rem 1.25rem !important;
+    border-bottom: 1px solid var(--luxury-beige) !important;
+    border-top: none !important;
+    vertical-align: middle !important;
+}
+
+.table tbody tr:last-child td,
+.table tbody tr:last-child th {
+    border-bottom: none;
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--luxury-cream) !important;
+}
+
+/* Button Sizes */
+.btn-sm {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.8125rem !important;
 }
 
 /* === BUTTONS === */

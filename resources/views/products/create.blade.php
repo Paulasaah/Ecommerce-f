@@ -5,7 +5,7 @@
 <div class="luxury-dashboard">
     <!-- Header Section -->
     <div class="luxury-header">
-        <h3>Crear Producto</h3>
+        <h3>Nuevo producto</h3>
         <p>Unab Shop - Agregar Nuevo Producto al Catálogo</p>
     </div>
 
@@ -20,6 +20,17 @@
                     </h6>
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger mb-4">
+                            <strong><i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>Por favor corrige los siguientes errores:</strong>
+                            <ul class="mb-0 mt-2" style="padding-left: 1.5rem;">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <form id="productForm" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="_method" value="POST">

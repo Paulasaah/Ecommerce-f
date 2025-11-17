@@ -46,4 +46,10 @@ class ProductController extends Controller
     {
         return view('products.show');
     }
+    function table(){
+        $products = Product::paginate(10);
+        return view('products.table',[
+            'products' => $products
+            ]);
+    }
 }
