@@ -27,5 +27,6 @@ Route::prefix('admin')->group(function(){
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
     Route::post('/categories/store',[ CategoryController::class,'store'])->name('admin.categories.store');
 
-    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::get('products/create', [ProductController::class, 'create'])->name('admin.products.create');
+    Route::post('products/store', [ProductController::class, 'store'])->name('admin.products.store');
 });

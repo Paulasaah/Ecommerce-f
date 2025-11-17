@@ -20,12 +20,13 @@
                     </h6>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form id="productForm" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="_method" value="POST">
 
                         <!-- Nombre -->
                         <div class="mb-4">
-                            <label for="nombre" class="form-label">
+                            <label for="name" class="form-label">
                                 <i class="fas fa-tag" style="margin-right: 8px; color: var(--luxury-accent);"></i>
                                 Nombre del Producto
                                 <span style="color: var(--error-red);">*</span>
@@ -33,8 +34,8 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                id="nombre"
-                                name="nombre"
+                                id="name"
+                                name="name"
                                 placeholder="Ej: iPhone 15 Pro Max 256GB"
                                 required
                             >
@@ -53,7 +54,7 @@
                             <select
                                 class="form-select"
                                 id="brand"
-                                name="brand"
+                                name="brand_id"
                                 required
                             >
                                 <option value="" selected disabled>Selecciona una marca</option>
@@ -75,8 +76,8 @@
                             </label>
                             <select
                                 class="form-select"
-                                id="categoria"
-                                name="categoria"
+                                id="category_id"
+                                name="category_id"
                                 required
                             >
                                 <option value="" selected disabled>Selecciona una categoría</option>
@@ -91,7 +92,7 @@
 
                         <!-- Precio -->
                         <div class="mb-4">
-                            <label for="precio" class="form-label">
+                            <label for="price" class="form-label">
                                 <i class="fas fa-dollar-sign" style="margin-right: 8px; color: var(--luxury-accent);"></i>
                                 Precio
                                 <span style="color: var(--error-red);">*</span>
@@ -103,8 +104,8 @@
                                 <input
                                     type="number"
                                     class="form-control"
-                                    id="precio"
-                                    name="precio"
+                                    id="price"
+                                    name="price"
                                     placeholder="0.00"
                                     step="0.01"
                                     min="0"
@@ -133,29 +134,6 @@
                             ></textarea>
                             <div class="form-text">
                                 Una buena descripción aumenta las ventas
-                            </div>
-                        </div>
-
-                        <!-- Imagen -->
-                        <div class="mb-4">
-                            <label for="img" class="form-label">
-                                <i class="fas fa-image" style="margin-right: 8px; color: var(--luxury-accent);"></i>
-                                Imagen del Producto
-                                <span style="color: var(--error-red);">*</span>
-                            </label>
-                            <div class="file-upload-area" id="fileUploadArea">
-                                <input
-                                    type="file"
-                                    id="img"
-                                    name="img"
-                                    accept="image/*"
-                                    required
-                                >
-                                <div class="upload-icon">
-                                    <i class="fas fa-cloud-upload-alt"></i>
-                                </div>
-                                <div class="upload-text">Arrastra tu imagen o haz clic para seleccionar</div>
-                                <div class="upload-subtext">JPG, PNG o GIF (máx. 5MB)</div>
                             </div>
                         </div>
 
